@@ -129,7 +129,7 @@ const Hero = () => {
         >
           <div className="relative w-full max-w-md aspect-square rounded-full overflow-hidden shadow-2xl border-8 border-white ring-8 ring-purple/10">
             <img 
-              src="3.jpg" 
+              src="https://lh3.googleusercontent.com/d/1px1Dv8RsiHJfy_KyRGL7fR8J9VWnu1sZ" 
               alt="Odunyemi Moshood Temitayo" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
@@ -237,22 +237,31 @@ const About = () => {
 const Projects = () => {
   const projectList = [
     {
-      title: "E-commerce Dashboard",
-      image: "https://picsum.photos/seed/ecommerce/800/500",
-      stack: "React & Node.js",
-      description: "A comprehensive admin panel for managing products, orders, and customer data."
+      title: "Hospital & Doctor Review Platform",
+      image: "https://picsum.photos/seed/healthcare/800/600",
+      description: "A healthcare search engine with bulk data importing, member login, and Siri-like voice search.",
+      tech: ["React", "Next.js", "Tailwind CSS", "Firebase"],
+      liveLink: "https://niga-health-care.vercel.app/",
+      codeLink: "https://github.com/odunyemi-temitayo",
+      featured: true
     },
     {
-      title: "Real-time Chat App",
-      image: "https://picsum.photos/seed/chat/800/500",
-      stack: "Firebase Auth & Firestore",
-      description: "Secure messaging platform with instant updates and user presence tracking."
+      title: "Safety & Behavioral Observation Tool",
+      image: "https://picsum.photos/seed/safety/800/600",
+      description: "A workplace safety app featuring PPE/Equipment categories, Role-Based Access Control (RBAC), and a Chart.js dashboard.",
+      tech: ["React", "Next.js", "Tailwind CSS", "Firebase"],
+      liveLink: "https://sbo-kohl.vercel.app/",
+      codeLink: "https://github.com/odunyemi-temitayo",
+      featured: false
     },
     {
-      title: "Task Management System",
-      image: "https://picsum.photos/seed/tasks/800/500",
-      stack: "Tailwind CSS & Node.js",
-      description: "Collaborative tool for teams to organize, track, and complete projects efficiently."
+      title: "Cloud-Integrated POS System",
+      image: "https://picsum.photos/seed/pos/800/600",
+      description: "A Point of Sale application built with Supabase for real-time CRUD operations and inventory management.",
+      tech: ["React", "Next.js", "Tailwind CSS", "Supabase"],
+      liveLink: "https://supermarketapp-tau.vercel.app/",
+      codeLink: "https://github.com/odunyemi-temitayo",
+      featured: false
     }
   ];
 
@@ -260,11 +269,11 @@ const Projects = () => {
     <section id="projects" className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-black text-navy mb-4 uppercase tracking-tighter">Project Highlights</h2>
+          <h2 className="text-4xl md:text-5xl font-black text-navy mb-4 uppercase tracking-tighter">Work Highlights</h2>
           <div className="h-2 w-24 bg-accent mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {projectList.map((project, index) => (
             <motion.div
               key={index}
@@ -272,32 +281,63 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500"
+              className={`group bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col ${
+                project.featured ? 'md:col-span-8 md:row-span-2' : 'md:col-span-4'
+              }`}
             >
-              <div className="relative overflow-hidden aspect-[16/10] bg-gray-100">
+              <div className={`relative overflow-hidden bg-gray-100 ${project.featured ? 'h-64 md:h-full' : 'h-48'}`}>
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm">
-                  <span className="text-[10px] font-black text-navy uppercase tracking-widest">{project.stack}</span>
+                <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                  {project.tech.map((tag, i) => (
+                    <span key={i} className="bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-md text-[9px] font-black text-navy uppercase tracking-widest shadow-sm">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
-              <div className="p-8">
-                <h3 className="text-xl font-black text-navy mb-3 uppercase tracking-tight group-hover:text-purple transition-colors">
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-xl font-black text-purple mb-3 uppercase tracking-tight group-hover:text-accent transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                <p className="text-gray-500 text-sm leading-relaxed mb-8 flex-grow">
                   {project.description}
                 </p>
-                <div className="flex items-center text-navy font-bold text-xs uppercase tracking-widest group-hover:text-accent transition-colors">
-                  View Project <ExternalLink size={14} className="ml-2" />
+                <div className="flex gap-4">
+                  <a 
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-navy text-white text-center py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-accent transition-colors flex items-center justify-center gap-2"
+                  >
+                    <ExternalLink size={14} /> Live Demo
+                  </a>
+                  <a 
+                    href={project.codeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 border-2 border-navy text-navy text-center py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-navy hover:text-white transition-all flex items-center justify-center gap-2"
+                  >
+                    <Github size={14} /> View Code
+                  </a>
                 </div>
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-24 text-center">
+          <p className="text-gray-400 font-bold mb-6 uppercase tracking-[0.3em] text-xs">Ready to bring your idea to life?</p>
+          <a 
+            href="#contact" 
+            className="inline-block bg-purple text-white px-12 py-5 rounded-2xl font-black text-lg hover:bg-accent transition-all shadow-xl shadow-purple/20 uppercase hover:-translate-y-1"
+          >
+            Start a Project
+          </a>
         </div>
       </div>
     </section>
